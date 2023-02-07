@@ -15,7 +15,7 @@ good-quality coding standards - file structure, best practices, css framework
 README
 
 
-Login - Authenticate
+Login - Authenticate - Isaac
     -Front End user interaction
         -new users need to create account
             -username 
@@ -40,7 +40,7 @@ Login - Authenticate
         -session management
         -password changing
     -Link front and back
-Buy Stocks
+Buy Stocks - Victor
     -Front end user interaction
         -input how many
         -submit
@@ -67,8 +67,9 @@ Sell Stocks
             -Add money to account
         -Add a delay or leave a sell open or partial sells - bonus
     -Link
-View Portfolio
+View Portfolio - Nicholas
     -Front End
+        -Profile Badges
         -view owned stocks
         -watch list of stocks - bonus
         -Total profit and loss on account
@@ -83,7 +84,7 @@ View Portfolio
         -minor math to show data
         -Allow user to change account info - bonus
     -Link
-Search Stocks - Discover
+Search Stocks - Discover - Yamir
     -Front End
         -Search bar
         -recommend section
@@ -95,7 +96,7 @@ Search Stocks - Discover
         -have hour list of biggest movers
         -predefined search parameters for recommend industries
     -Link
-Watch List
+Watch List - Jacob
     -Front End
         -Add stock to watch list
         -Remove stock from list
