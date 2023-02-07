@@ -1,0 +1,10 @@
+Twelve Data finance information stite
+Server polls opening price at beginning of day for all stocks it is currently watching across all users - attempt to have all price changes for when a user uses the app
+Bootstrap for front end
+Maybe maybe not handlebars
+MySQL for database
+Nicholas - profile
+Isaac - user authenication
+Victor - Search
+Yamir - SQL and Buying and Selling stocks
+Jacob - watch list
