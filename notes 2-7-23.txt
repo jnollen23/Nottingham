@@ -1,0 +1,17 @@
+Database notes
+Watch List Table
+    -watch list 8 stocks
+    -user id - fk
+
+User Table
+    -username
+    -user id - pk
+    -email
+    -password
+
+Stock Table
+    -Stock Symbol - pk
+    -current price
+    -opening price
+    -date of opening price
+    -company name

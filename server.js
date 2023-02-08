@@ -10,9 +10,4 @@ app.use(express.urlencoded({ extended: true }));
 
 //app.listen(PORT, () => console.log("Now Listneing"));
 
-async function getvalue() {
-    const value = await stock.getCurrentPrice("A")
-    console.log(value);
-}
 
-getvalue();
