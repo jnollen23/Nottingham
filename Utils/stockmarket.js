@@ -121,3 +121,7 @@ stocks.closeRealTimePrice = function CloseRealTimePrice() {
     }
 }
 
+function sendHeartBeat(){
+    
+}
+
