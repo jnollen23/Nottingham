@@ -1,11 +1,12 @@
 require("dotenv").config;
 const express = require('express');
+
 const session = require("express-session");
 const handlebars = require("express-handlebars");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const routes = require('./controllers');
-const sequelize = require('./config/connection');
+const sequelize = require('./configuration/config');
 const stock = require('./utils/stockmarket');
 
 const app = express();
