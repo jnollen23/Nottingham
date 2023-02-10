@@ -26,6 +26,7 @@ let stocksToTrack = null;
 let httpServer = null;
 let wsServer = null;
 let wsConnection = null;
+let heartbeatID = null;
 
 stocks.setupRealTimePrice = function SetupRealTimePrice(stocksToTrackV) {
     wsClient = new ws.client();
@@ -61,8 +62,10 @@ stocks.setupRealTimePrice = function SetupRealTimePrice(stocksToTrackV) {
 
             connection.sendUTF(JSON.stringify(message));
         });
-
+        
+        heartbeatID = setTimeout(heartbeat, 10000);
         wsConnection = connection;
+
     });
     wsClient.on("open", function () {
         console.log("Connection Open")
@@ -118,10 +121,12 @@ stocks.closeRealTimePrice = function CloseRealTimePrice() {
     if (wsConnection) {
         wsConnection.close(1001);
         wsConnection = null;
+        clearTimeout(heartbeatID);
     }
 }
 
-function sendHeartBeat(){
-    
+function heartbeat(){
+    wsConnection.ping("Heartbeat");
+    heartbeatID = setTimeout(heartbeat, 10000);   
 }
 

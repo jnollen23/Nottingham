@@ -28,7 +28,7 @@ const sess = {
 app.use(session(sess));
 
 //Middleware for handlebars
-const hbs = exphbs.create();
+const hbs = handlebars.create();
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
@@ -40,4 +40,4 @@ app.use(routes);
 
 //app.listen(PORT, () => console.log("Now Listneing"));
 
-
+stock.setupRealTimePrice("AAPL");
