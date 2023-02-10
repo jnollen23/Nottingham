@@ -121,3 +121,32 @@ stocks.closeRealTimePrice = function CloseRealTimePrice() {
     }
 }
 
+stocks.getStockList = async function GetStockList() {
+    try {
+        let results = await fetch(`${apiURL}stocks`);
+
+        return results.json();
+    }
+    catch(e) {
+        return Response(e.message);
+    }
+}
+
+async function GetStocksBySearch(search) {
+    search = search.toLowerCase();
+
+    await getStockList()
+        .then(
+            response => response.data.filter(
+                data => data.name.toLowerCase()
+                .replace(" ", "")
+                .includes(
+                    search.replace(" ", "")
+                )
+            ).sort(
+                (a, b) => (b.name.startsWith(search)) - (a.name.startsWith(search))
+            )
+            ?? []
+        );
+    
+}
