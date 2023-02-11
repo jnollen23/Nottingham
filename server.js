@@ -37,5 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(routes);
 
-app.listen(PORT, () => console.log("Now Listneing"));
-
+// app.listen(PORT, () => console.log("Now Listneing"));
+sequelize.sync({ force: true }).then(() => {
+    app.listen(PORT, () => console.log('Now listening at http://localhost:3001/'));
+  });

@@ -1,4 +1,4 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const { response } = require("express");
 const sequelize = require("../configuration/config");
 const { User } = require("../models");
