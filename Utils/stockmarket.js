@@ -1,4 +1,5 @@
 require("dotenv").config();
+const router = require('express').Router();
 const ws = require('websocket');
 const http = require('http');
 
@@ -121,3 +122,4 @@ stocks.closeRealTimePrice = function CloseRealTimePrice() {
     }
 }
 
+module.exports = router;
