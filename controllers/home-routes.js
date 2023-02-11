@@ -7,13 +7,13 @@ const withAuth = require("../utils/auth");
 router.get("/", async (req, res) => {
   try {
     if (!req.session.logged_in) {
-      res.render("homepage");
+      res.render("login");
     } else {
       const userData = await User.findByPk(req.session.user_id, {
         attributes: { exclude: ["password"] },
       });
       const user = userData.get({ plain: true });
-      res.render("homepage", {
+      res.render("login", {
         user,
         logged_in: req.session.logged_in,
       });
@@ -43,7 +43,7 @@ router.get("/login", (req, res) => {
     res.redirect("/dashboard");
     return;
   }
-  res.render("login");
+  res.render("signup");
 });
 
 module.exports = router;
