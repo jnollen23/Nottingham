@@ -10,7 +10,7 @@ stocks.getCurrentPrice = async function GetCurrentPrice(stockName) {
     const path = `${apiURL}price?symbol=${stockName}&apikey=${apiKey}`
     const response = await fetch(path);
 
-    return response.json;
+    return response.json();
 }
 
 stocks.getOpenPrice = async function GetOpenPrice(stockName) {

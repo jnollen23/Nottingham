@@ -10,7 +10,7 @@ const sequelize = require('./configuration/config');
 const stock = require('./utils/stockmarket');
 
 const app = express();
-const PORT = process.env.APP_PORT || 3001;
+const PORT = process.env.APP_PORT;
 
 const sess = {
     secret: process.env.SUPER_SECRET,
@@ -28,7 +28,7 @@ const sess = {
 app.use(session(sess));
 
 //Middleware for handlebars
-const hbs = exphbs.create();
+const hbs = handlebars.create();
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
@@ -38,5 +38,7 @@ app.use(express.static('./public'));
 
 app.use(routes);
 
-app.listen(PORT, () => console.log("Now Listneing"));
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log("Now Listneing"));
+});
 
