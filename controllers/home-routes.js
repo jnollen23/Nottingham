@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const watchlist = require('./watchlist');
 const { response } = require("express");
 const sequelize = require("../configuration/config");
 const { User } = require("../models");
@@ -45,5 +46,8 @@ router.get("/login", (req, res) => {
   }
   res.render("signup");
 });
+
+
+router.use('/watchlist', watchlist);
 
 module.exports = router;

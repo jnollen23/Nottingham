@@ -1,0 +1,13 @@
+<div class="full-list">
+    {{#each watchlists as |list|}}
+    <div class="watchlist">
+        {{list.watchlistID}}
+        {{#each list.stockSymbol as |stock|}}
+        <div class="stock">
+            {{stock}}
+        </div>
+        {{/each}}
+    </div>
+    <br>
+    {{/each}}
+</div>
