@@ -20,7 +20,6 @@ stocks.getOpenPrice = async function GetOpenPrice(stockName) {
     return response.json();
 }
 
-
 let wsClient = null;
 let stocksToTrack = null;
 let httpServer = null;
@@ -112,9 +111,6 @@ stocks.openTestServer = function OpenTestServer() {
             console.log("connection closed");
         });
     });
-
-
-
 }
 
 stocks.closeRealTimePrice = function CloseRealTimePrice() {
