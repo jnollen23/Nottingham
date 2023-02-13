@@ -8,6 +8,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const routes = require('./controllers');
 const sequelize = require('./configuration/config');
 const stock = require('./utils/stockmarket');
+const withAuth = require('./utils/auth');
 
 const app = express();
 const PORT = process.env.APP_PORT;
@@ -32,6 +33,7 @@ const hbs = handlebars.create();
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
+app.use(withAuth);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'));

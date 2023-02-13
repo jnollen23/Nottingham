@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
             }
         }
         //need to render lists
-        res.render('watchlist', { sortedList });
+        res.render('watchlist', { watchlists: sortedList });
     }
     catch(err) {
         res.status(404).send("unable to load page");
