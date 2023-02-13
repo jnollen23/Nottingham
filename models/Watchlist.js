@@ -12,8 +12,8 @@ Watchlist.init(
         userID: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'users',
-                key: 'userID'
+                model: 'user',
+                key: 'id'
             },
             allowNull: false,
         },
