@@ -1,13 +1,43 @@
-<div class="full-list">
-    {{#each watchlists as |list|}}
-    <div class="watchlist">
-        {{list.watchlistID}}
-        {{#each list.stockSymbol as |stock|}}
-        <div class="stock">
-            {{stock}}
+<div class="container">
+    <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2 col-sm-12">
+        <div class="accordion" id="watchlist-accordion">
+            {{#each watchlists as |list|}}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="nothing">
+                    <button class='accordion-button collapsed' type="button" data-bs-toggle="collapse"
+                        data-bs-target="#{{list.watchlistIDNoSpace}}" aria-expanded="false"
+                        aria-controls="{{list.watchlistIDNoSpace}}">
+                        <i class="fa-solid fa-ellipsis" onclick=""></i>
+                        &nbsp;
+                        {{list.watchlistID}}
+                    </button>
+                </h2>
+                <div class="accordion-collapse collapse" id="{{list.watchlistIDNoSpace}}"
+                    data-bs-parent="#watchlist-accordion" aria-labelledby="{{list.watchlistIDNoSpace}}">
+                    <div class="stock accordion-body">
+                        {{#each list.stockSymbols as |stock|}}
+                        <div>
+                            {{#if stock.isNotEmpty}}
+                            <button onclick="deleteItem('{{stock.list}}','{{stock.stock}}')"><i
+                                    class="fa-regular fa-trash-can delete-watchlist-item"></i>&nbsp;</button>
+                            {{/if}}
+                            <span>{{stock.stock}}</span>
+                            <span class="justify-right">{{price}}</span>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content ">
+                        <div class="modal-body nes-container is-rounded nes-text is-error text-center">
+                            Please enter a valid email/password
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
         </div>
-        {{/each}}
     </div>
-    <br>
-    {{/each}}
 </div>
