@@ -4,6 +4,10 @@
     </div>
 
     <div class="col-8 offset-2">
+        <div class="jumbotron" id="userPort">
+            <h1>Username</h1>
+            <h6>Total Money Invested</h6>
+        </div>
         <div class="card">
             <div class="card-body">
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -12,15 +16,13 @@
                             class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
                             aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                            aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="1000000">
                             <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
                         </div>
                         <div class="carousel-item" data-bs-interval="1000000">
-                            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+                            <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -34,11 +36,13 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
+                
               
             </div>
+            
         </div>
     </div>
-
+    
 
 </div>
 <script src="./js/charts.js"></script>
