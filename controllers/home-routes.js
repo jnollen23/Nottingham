@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
         attributes: { exclude: ["password"] },
       });
       const user = userData.get({ plain: true });
-      res.render("login", {
+      res.render("dashboard", {
         user,
         logged_in: req.session.logged_in,
       });
@@ -46,7 +46,6 @@ router.get("/login", (req, res) => {
   }
   res.render("signup");
 });
-
 
 router.use('/watchlist', watchlist);
 

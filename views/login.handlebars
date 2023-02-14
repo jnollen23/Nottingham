@@ -1,15 +1,47 @@
+<form class="form text-center m-5">
+  <h1>Welcome to Nottingham</h1>
+  <img
+    src="./images/NOTTINGHAM-LOGO.png"
+    alt="nottingham logo"
+    class="logo m-5"
+  />
 
-<form class="form login-form">
-    <h2>Login</h2>
-  <div class="container">
-    <label for="eMail"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" id="login-email"/>
-    <label for="passWord"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" id="login-password"/>
-    <button type="submit">Login</button>   
-  </div>  
+  <h5>description description description description</h5>
+
+  <div class="nes-text content m-2 p-2">
+
+    <div class="nes-field m-3">
+  <label for="name_field" class="nes-text is-primary">Email</label>
+  <input type="text" id="login-email" class="nes-input">
+</div>
+
+
+     <div class="nes-field m-3">
+  <label for="name_field" class="nes-text is-primary">Password</label>
+  <input type="password" id="login-password" class="nes-input">
+</div>
+
+    <a class="m-3">
+      <button type="button" class="nes-btn is-success login-form">Login</button>
+    </a>
+
+  </div>
+  <div class="login-form text-center">
+  <a type="button" class="nes-btn is-primary" href="/login">Sign Up</a>
+</div>
+
 </form>
 
-<button><a type="submit" href="/login">Sign Up</i></a></button>
+
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div
+        class="modal-body nes-container is-rounded nes-text is-error text-center">
+        Email or Password are incorrect. Please try again.
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="./js/login.js"></script>

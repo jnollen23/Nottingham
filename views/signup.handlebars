@@ -1,19 +1,40 @@
-<h1 class="pageTitle">SIGNUP</h1>
-
-<form class="form signup-form">
+<form class="form text-center m-5">
   <h2>Sign Up</h2>
-  <div class="container">
-    <label for="signup-name"><b>Enter Your Name</b></label>
-    <input type="text" placeholder="Enter your name" id="signup-name"/>
+  <div class="nes-text content m-5 p-5">
 
-    <label for="signup-name"><b>Enter Email</b></label>
-    <input type="text" placeholder="Enter Email" id="signup-email"/>
+    <div class="nes-field m-3">
+  <label for="name_field" class="nes-text is-primary">Enter your name</label>
+  <input type="text" id="signup-name" class="nes-input">
+</div>
 
-    <label for="signup-password"><b>Enter Password</b></label>
-    <input type="password" placeholder="Create Password" id="signup-password"/>
+    <div class="nes-field m-3">
+  <label for="name_field" class="nes-text is-primary">Enter Email</label>
+  <input type="text" id="signup-email" class="nes-input">
+</div>
 
-    <button type="submit">Sign Up</button>    
+
+     <div class="nes-field m-3">
+  <label for="name_field" class="nes-text is-primary">Enter Password</label>
+  <input type="password" id="signup-password" class="nes-input">
+
+
+
+   <div  class="m-5"><a>
+      <button type="button" class="nes-btn is-success signup-form">Sign Up</button>
+    </a>
+</div>
+    
   </div>
 </form>
+
+ <div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content ">
+      <div class="modal-body nes-container is-rounded nes-text is-error text-center">
+        Please enter a valid email/password
+      </div>
+      </div>
+    </div>
+  </div>
 
 <script src="./js/signup.js"></script>
