@@ -62,7 +62,6 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-
 router.use('/watchlist', watchlist);
 
 module.exports = router;
