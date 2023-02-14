@@ -16,9 +16,11 @@ const PORT = process.env.APP_PORT;
 const sess = {
     secret: process.env.SUPER_SECRET,
     cookie: {
+        httpOnly: true,
         // Stored in milliseconds
         maxAge: 5 * 60 * 1000, // expires after 5 minutes
     },
+    rolling: true,
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
