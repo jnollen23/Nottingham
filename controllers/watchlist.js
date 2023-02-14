@@ -19,35 +19,56 @@ router.get('/', async (req, res) => {
                 count++;
                 sortedList[count] = {
                     watchlistID: userList[i].watchlistID,
-                    stocks: [
-                        userList[i].stockSymbol
-                    ]
+                    watchlistIDNoSpace: userList[i].watchlistID.replace(/ /g, '_'),
+                    stockSymbols: [{
+                        stock: userList[i].stockSymbol,
+                        list: userList[i].watchlistID,
+                        isNotEmpty: (userList[i].stockSymbol !== "_")
+                    }]
                 };
             }
             else {
-                sortedList[count].stocks.push(userList[i].stockSymbol);
+                sortedList[count].stockSymbols.push({ 
+                    stock: userList[i].stockSymbol, 
+                    list: userList[i].watchlistID,
+                    isNotEmpty: true,
+                });
             }
         }
         //need to render lists
-        res.render('watchlist', { watchlists: sortedList });
+        res.render('watchlist', {
+            watchlists: sortedList,
+            logged_in: req.session.logged_in,
+        });
     }
-    catch(err) {
+    catch (err) {
         res.status(404).send("unable to load page");
         console.log(err)
     }
 });
 
-router.delete('/stock/:ID', async (req, res) => {
+router.delete('/', async (req, res) => {
     try {
-        await Watchlist.detroy({
-            where: {
-                userID: req.session.userID,
-                watchlistID: req.params.ID,
-                stockSymbol: req.body.stockSymbol
-            }
-        });
-        if (!userList[0]) res.status(404).json({ message: "No watch list with that ID" });
-        res.status(200);
+        if (req.body.stock !== '_') {
+            await Watchlist.destroy({
+                where: {
+                    userID: req.session.user_id,
+                    watchlistID: req.body.list,
+                    stockSymbol: req.body.stock
+                }
+            });
+            const listExists = Watchlist.findOne({ where: { watchlistID: req.body.list } })
+                .then((obj) => {
+                    if (obj) return;
+                    Watchlist.create({
+                        userID: req.session.user_id,
+                        watchlistID: req.body.list,
+                        stockSymbol: '_'
+                    })
+                })
+
+            res.status(200).json({ message: "successfully deleted stock" });
+        }
     }
     catch (err) {
         res.status(404).json({ err });
