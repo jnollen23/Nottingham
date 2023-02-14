@@ -17,7 +17,6 @@ const signupFormHandler = async (event) => {
                 'Content-Type': 'application/json'
             },
         });
-
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
@@ -28,7 +27,7 @@ const signupFormHandler = async (event) => {
                 location.reload();
               }
             };
-        }
+          }
     }
 };
 
