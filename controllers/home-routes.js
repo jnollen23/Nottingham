@@ -4,6 +4,9 @@ const { response } = require("express");
 const sequelize = require("../configuration/config");
 const { User } = require("../models");
 const withAuth = require("../utils/auth");
+const stock = require('../Utils/stockmarket');
+
+//const searchResult = requrie('../search');
 
 router.get("/", async (req, res) => {
   try {
@@ -39,6 +42,19 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
+router.get("/search/:ticker", withAuth, async(req, res) => {
+  let stockCurrent = await stock.getCurrentPrice(req.params.ticker)
+  let stockOpen = await stock.getOpenPrice(req.params.ticker)
+  let stockCurrentPrice = "$"+parseFloat(stockCurrent.price).toFixed(2)
+  let stockOpenPrice = "$"+parseFloat(stockOpen.open).toFixed(2)
+  let stockChangePerc = "(" + parseFloat(stockOpen.change).toFixed(2) + "%)"
+  
+
+  console.log(stockOpen)
+  
+  res.render("search", {tickerCurrent: stockCurrentPrice, tickerOpenPrice: stockOpenPrice, tickerOpen: stockOpen, tickerChange: stockChangePerc})
+});
+
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/dashboard");
@@ -46,7 +62,6 @@ router.get("/login", (req, res) => {
   }
   res.render("login");
 });
-
 
 router.use('/watchlist', watchlist);
 
