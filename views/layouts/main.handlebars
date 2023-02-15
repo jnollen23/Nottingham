@@ -16,6 +16,7 @@
       {{#if logged_in}}
     <nav>
       <input id="getTicker" class="searchBarInput"> </input>
+      <button type="button" class="btn" id="searchButton">Submit</button>
       <button class="btn" id="logout">logout</button>
     </nav>
     {{/if}}
@@ -28,8 +29,10 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"></script>
     {{#if logged_in}}
-  <script src="/js/logout.js"></script>
+  <script src="./js/logout.js"></script>
+  <script src="./js/search.js"></script>
   {{/if}}
+ 
   {{!-- <script src="./js/login.js"></script>
   <script src="./js/signup.js"></script> --}}
 </body>

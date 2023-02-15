@@ -49,10 +49,13 @@ router.get("/search/:ticker", withAuth, async(req, res) => {
   let stockOpenPrice = "$"+parseFloat(stockOpen.open).toFixed(2)
   let stockChangePerc = "(" + parseFloat(stockOpen.change).toFixed(2) + "%)"
   
+  res.render("search", {
 
-  console.log(stockOpen)
-  
-  res.render("search", {tickerCurrent: stockCurrentPrice, tickerOpenPrice: stockOpenPrice, tickerOpen: stockOpen, tickerChange: stockChangePerc})
+    logged_in: true,
+    tickerCurrent: stockCurrentPrice, 
+    tickerOpenPrice: stockOpenPrice, 
+    tickerOpen: stockOpen, 
+    tickerChange: stockChangePerc})
 });
 
 router.get("/login", (req, res) => {
