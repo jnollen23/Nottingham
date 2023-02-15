@@ -23,7 +23,7 @@ const loginFormHandler = async (event) => {
             modal.style.display = "initial";
             window.onclick = function (event) {
           if (event.target == modal) {
-             location.reload();
+             modal.style.display = "none";
       }
     };
         }

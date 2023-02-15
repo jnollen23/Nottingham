@@ -36,6 +36,11 @@ const stocksData = [
         currentPrice: 2780,
         openPrice: 2773,
         dateOfOpeningPrice: '2023-12-02',
+    },{
+        stockSymbol: `_`,
+        currentPrice: 0,
+        openPrice: 0,
+        dateOfOpeningPrice: '2023-12-02',
     },
 ];
 const seedStocks = () => Stocks.bulkCreate(stocksData);
