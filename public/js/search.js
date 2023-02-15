@@ -1,6 +1,6 @@
-document.getElementById("searchButton").addEventListener("click", function() {
-    console.log("test")
+document.getElementById("searchButton").addEventListener("click", function(event) {
+    event.preventDefault();
     let ticker = document.querySelector(`#getTicker`).value.trim();
-    window.location.href ='/search/' + ticker
+    document.location.replace('/search/' + ticker);
+    // window.location.href ='/search/' + ticker
 });
-
