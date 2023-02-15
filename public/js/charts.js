@@ -1,22 +1,49 @@
 var ctx = document.getElementById('myChart');
 
 var data = {
-  labels: ["stock1", "stock2", "stock3", "stock4", "stock5"],
+  labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"],
   datasets: [
     {
-      label: "TeamA Score",
+      label: "Stock A",
       data: [10, 50, 25, 70, 40],
-      backgroundColor: "blue",
-      borderColor: "lightblue",
+      backgroundColor: "#f32f2f",
+      borderColor: "#ff6f6f",
       fill: false,
       lineTension: 0,
       radius: 5
     },
     {
-      label: "TeamB Score",
+      label: "Stock B",
       data: [20, 35, 40, 60, 50],
-      backgroundColor: "green",
-      borderColor: "lightgreen",
+      backgroundColor: "#ffe56f",
+      borderColor: "#ffd100",
+      fill: false,
+      lineTension: 0,
+      radius: 5
+    },
+    {
+      label: "Stock C",
+      data: [50, 60, 75, 80, 60],
+      backgroundColor: "#7aff6f",
+      borderColor: "#21ea11",
+      fill: false,
+      lineTension: 0,
+      radius: 5
+    },
+    {
+      label: "Stock D",
+      data: [90, 25, 45, 20, 10],
+      backgroundColor: "#6f89ff",
+      borderColor: "#1940f0",
+      fill: false,
+      lineTension: 0,
+      radius: 5
+    },
+    {
+      label: "Stock E",
+      data: [70, 20, 15, 40, 0],
+      backgroundColor: "#d36fff",
+      borderColor: "#a811eb",
       fill: false,
       lineTension: 0,
       radius: 5
@@ -55,37 +82,29 @@ var chart = new Chart(ctx, {
 //chart 2
 var ctx2 = document.getElementById('myChart2');
 
-var data = {
+var data2 = {
   labels: ["stock1", "stock2", "stock3", "stock4", "stock5"],
   datasets: [
     {
       label: "Total Investments",
       data: [10, 50, 25, 70, 40],
-      backgroundColor: "blue",
-      borderColor: "lightblue",
-      fill: false,
-      lineTension: 0,
-      radius: 5
-    },
-    {
-      label: "TeamB Score",
-      data: [20, 35, 40, 60, 50],
-      backgroundColor: "green",
-      borderColor: "lightgreen",
+      backgroundColor: ["#ff6f6f", "#ffe56f", "#7aff6f", "#6f89ff", "#d36fff"],
+      
       fill: false,
       lineTension: 0,
       radius: 5
     }
+  
   ]
 };
 
 //options
-var options = {
+var options2 = {
   responsive: true,
   title: {
     display: true,
     position: "top",
-    text: "Line Graph",
+    text: "Donut Graph",
     fontSize: 18,
     fontColor: "#111"
   },
@@ -101,7 +120,9 @@ var options = {
 
 //create Chart class object
 var chart2 = new Chart(ctx2, {
-  type: "pie",
-  data: data,
-  options: options
+  type: "doughnut",
+  data: data2,
+  options: options2
 });
+
+
