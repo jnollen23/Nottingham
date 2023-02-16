@@ -64,8 +64,10 @@ router.get("/portfolio", withAuth, async (req, res) => {
       attributes: { exclude: ["password"] },
     });
     const user = userData.get({ plain: true});
+    const balance = parseFloat(user.balance / 100).toFixed(2);
     res.render("portfolio", {
       user,
+      balance,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
