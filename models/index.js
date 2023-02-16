@@ -1,7 +1,7 @@
 const User = require('./user');
 const Watchlist = require('./Watchlist');
 const Stocks = require('./Stocks');
-const UserPortfolio = require('./UserPortfolio')
+const UserPortfolio = require('./userportfolio')
 
 Watchlist.hasMany(User, {
     foreignKey:'id',
