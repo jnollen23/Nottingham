@@ -32,13 +32,13 @@ router.post('/add', async (req, res) => {
         const confirm = await sequelize.query(`
         select * from watchlist where 
         watchlistID = '${req.body.watchlistID}' and 
-        userID = ${Number(req.body.user_id)}
+        userID = ${Number(req.session.user_id)}
         `);
         if (confirm.length > 0) {
             const doesExist = await sequelize.query(`
             select * from watchlist where 
             watchlistID = '${req.body.watchlistID}' and 
-            userID = ${Number(req.body.user_id)} and
+            userID = ${Number(req.session.user_id)} and
             stockSymbol = '${req.body.stockSymbol}'
             `);
             if (doesExist[0].length > 0) {
@@ -51,7 +51,7 @@ router.post('/add', async (req, res) => {
                 }, {
                     where: {
                         watchlistID: req.body.watchlistID,
-                        userID: req.body.user_id,
+                        userID: req.session.user_id,
                         stockSymbol: '_'
                     }
                 });
@@ -59,7 +59,7 @@ router.post('/add', async (req, res) => {
             else {
                 await Watchlist.create({
                     watchlistID: req.body.watchlistID,
-                    userID: req.body.user_id,
+                    userID: req.session.user_id,
                     stockSymbol: req.body.stockSymbol
                 });
             }
