@@ -45,8 +45,8 @@ router.get("/search/:ticker", async(req, res) => {
     console.log(req.params.ticker)
     let stockCurrent = await stock.getCurrentPrice(req.params.ticker)
     let stockOpen = await stock.getOpenPrice(req.params.ticker)
-    console.log(`Stock Current Price:${stockCurrent}`);
-    console.log(`Stock Open Price ${stockOpen}`);
+    console.log(`Stock Current Price:${stockCurrent.price}`);
+    console.log(`Stock Open Price ${stockOpen.open}`);
     if (req.params.ticker === ""){
       let stockName = "Stock Not Found"
       
