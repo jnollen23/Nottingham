@@ -12,7 +12,8 @@
   ## Description:
   Nottingham is an online stock trading website that provides a user-friendly platform for investors to buy and sell stocks.
   &nbsp;  
-  ![Alt text](public/images/NOTTINGHAM-SS.PNG)
+  ![Alt text](public/images/NOTTINGHAM-SS-1.PNG)
+  ![Alt text](public/images/NOTTINGHAM-SS-2.PNG)
   &nbsp;  
   Deployment Link: https://nottingham.herokuapp.com/
   &nbsp;  
