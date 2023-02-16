@@ -6,8 +6,6 @@ const { User } = require("../models");
 const withAuth = require("../utils/auth");
 const stock = require('../Utils/stockmarket');
 
-//const searchResult = requrie('../search');
-
 router.get("/", async (req, res) => {
   try {
     if (!req.session.logged_in) {
@@ -43,19 +41,36 @@ router.get("/dashboard", withAuth, async (req, res) => {
 });
 
 router.get("/search/:ticker", withAuth, async(req, res) => {
+  
   let stockCurrent = await stock.getCurrentPrice(req.params.ticker)
   let stockOpen = await stock.getOpenPrice(req.params.ticker)
-  let stockCurrentPrice = "$"+parseFloat(stockCurrent.price).toFixed(2)
-  let stockOpenPrice = "$"+parseFloat(stockOpen.open).toFixed(2)
-  let stockChangePerc = "(" + parseFloat(stockOpen.change).toFixed(2) + "%)"
-  
-  res.render("search", {
+  console.log(stockOpen)
+  console.log(stockOpen.status)
 
-    logged_in: true,
-    tickerCurrent: stockCurrentPrice, 
-    tickerOpenPrice: stockOpenPrice, 
-    tickerOpen: stockOpen, 
-    tickerChange: stockChangePerc})
+  if (stockOpen.status === "error"){
+    let stockName = "Stock Not Found"
+    
+    res.render("search", {
+
+      logged_in: true,
+      tickerName: stockName,
+    })
+  }
+
+  else{
+    let stockCurrentPrice = "$"+parseFloat(stockCurrent.price).toFixed(2)
+    let stockOpenPrice = "$"+parseFloat(stockOpen.open).toFixed(2)
+    let stockChangePerc = "(" + parseFloat(stockOpen.change).toFixed(2) + "%)"
+
+    res.render("search", {
+
+      logged_in: true,
+      tickerName: stockOpen.name,
+      tickerCurrent: stockCurrentPrice, 
+      tickerOpenPrice: stockOpenPrice,  
+      tickerChange: stockChangePerc
+    })
+  }
 });
 
 router.get("/login", (req, res) => {

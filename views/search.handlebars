@@ -3,7 +3,7 @@
         <div>
             <container class="col-2 align-self-end max-width">
                 <h3>
-                    {{tickerOpen.name}}
+                    {{tickerName}}
                 </h3>
                 <h3>
                     {{tickerCurrent}}
@@ -14,7 +14,10 @@
                 </p>
             </container>
             <container class="col-8 max-width"></container>
-            <container class="col-2 max-width"></container>
+            <container class="col-2 max-width">
+                <button type="button" class="btn" id="addToWatch">Watch</button>
+                <button type="button" class="btn d-none" id="removeToWatch">Unwatch</button>
+            </container>
         </div>
     </div>
 </div> 
