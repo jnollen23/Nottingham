@@ -52,7 +52,7 @@ router.get("/search/:ticker", async(req, res) => {
       res.render("search", {
 
         logged_in: req.session.logged_in,
-        tickerName: "Please enter a stock ticker symbol",
+        tickerName: "Something went wrong with the search",
       })
     } else{
         let stockCurrentPrice = "$"+parseFloat(stockCurrent.price).toFixed(2)
@@ -71,6 +71,13 @@ router.get("/search/:ticker", async(req, res) => {
       res.status(500).json(err);
   }
 });
+
+router.get('/search/', (req,res)=>{
+  res.render("search",{
+    logged_in: req.session.logged_in,
+    tickerName: "Please enter a stock ticker symbol",
+  })
+})
 
 router.get("/portfolio", async (req, res) => {
   try {
