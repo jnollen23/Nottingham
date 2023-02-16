@@ -24,7 +24,6 @@ function deleteList(name){
             return false;
         });
 }
-
 function createNewList(){
     const element = document.getElementById('create-list');
     element.style.display = 'none';

@@ -59,4 +59,13 @@ canvas{
   background-color: transparent;
   border: none;
 }
-  
+
+.nav-btn {
+  width: 50px;
+}
+
+.navbar-nav {
+  float: none;
+  text-align: center;
+}
+

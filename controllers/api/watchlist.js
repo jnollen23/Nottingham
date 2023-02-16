@@ -2,14 +2,21 @@ const router = require('express').Router();
 const { Watchlist } = require('../../models');
 const sequelize = require('../../configuration/config');
 
-router.get('/:ID', async (req, res) => {
-    const watchList = await Watchlist.findAll({
-        where: {
-            userID: req.session.userID,
-            watchListID: req.params.id
-        }
+router.get('/allLists', async (req, res)=>{
+    const user_id = req.session.user_id || req.body.user_id;
+    const lists = await Watchlist.findAll({
+        attributes:[
+            'watchlistID'
+        ],
+        where:{
+            userID:user_id
+        },
+        group:['watchlistID']
     });
-    if (watchList[0] === undefined) res.status(400).json({ message: "Unable to find watchlist" })
+    if(lists){
+        res.status(200).json({lists});
+    }
+    else res.status(400).json({message:"user has no lists"});
 });
 
 router.post('/create/:id', async (req, res) => {
@@ -71,6 +78,16 @@ router.post('/add', async (req, res) => {
         console.log(err);
         res.status(400).json({ message: "error creating list" });
     }
+});
+
+router.get('/:ID', async (req, res) => {
+    const watchList = await Watchlist.findAll({
+        where: {
+            userID: req.session.userID,
+            watchListID: req.params.id
+        }
+    });
+    if (watchList[0] === undefined) res.status(400).json({ message: "Unable to find watchlist" })
 });
 
 module.exports = router;

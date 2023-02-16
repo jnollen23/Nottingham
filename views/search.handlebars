@@ -1,9 +1,16 @@
-<div class ="container text-left">
-    <div class="row align-items-end">
+<div class="container">
+    <div class="col-lg-8 col-md-8 offset-lg-2 offset-md-2 col-sm-12">
+        <div class="container text-center nes-container is-rounded m-5" style="background-color: white">
+            <h1>Searched Stock</h1>
+        </div>
+        
+        
+    
+    <div class="row align-items-end container text-center nes-container is-rounded m-5" style="background-color: white">
         <div>
             <container class="col-2 align-self-end max-width">
                 <h3>
-                    {{tickerOpen.name}}
+                    {{tickerName}}
                 </h3>
                 <h3>
                     {{tickerCurrent}}
@@ -14,7 +21,25 @@
                 </p>
             </container>
             <container class="col-8 max-width"></container>
-            <container class="col-2 max-width"></container>
+            <container class="col-2 max-width">
+                <button type="button" class="nes-btn is-success" id="addToWatch myBtn">Watch</button>
+                <button type="button" class="nes-btn is-success d-none" id="removeToWatch">Unwatch</button>
+
+{{!-- -------test data for modal------------------ --}}
+{{!-- <button class="trigger">Click here to trigger the modal!</button>
+<div class="modal">
+    <div class="modal-content">
+        <span class="close-button">×</span>
+        <h1>Hello, I am a modal!</h1>
+    </div>
+</div>
+                 --}}
+
+            </container>
         </div>
     </div>
 </div> 
+    </div>
+
+</div>
+
