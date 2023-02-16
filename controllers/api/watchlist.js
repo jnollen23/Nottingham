@@ -16,6 +16,7 @@ router.get('/allLists', async (req, res)=>{
     if(lists){
         res.status(200).json({lists});
     }
+    else res.status(400).json({message:"user has no lists"});
 });
 
 router.post('/create/:id', async (req, res) => {
