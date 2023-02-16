@@ -8,7 +8,7 @@ const data = {
     labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"],
     datasets: [
         {
-            label: "Stock A",
+            label: "MSFT",
             data: [10, 50, 25, 70, 40],
             backgroundColor: "#f32f2f",
             borderColor: "#ff6f6f",
@@ -17,7 +17,7 @@ const data = {
             radius: 5
         },
         {
-            label: "Stock B",
+            label: "AAPL",
             data: [20, 35, 40, 60, 50],
             backgroundColor: "#ffe56f",
             borderColor: "#ffd100",
@@ -26,7 +26,7 @@ const data = {
             radius: 5
         },
         {
-            label: "Stock C",
+            label: "AMD",
             data: [50, 60, 75, 80, 60],
             backgroundColor: "#7aff6f",
             borderColor: "#21ea11",
@@ -35,7 +35,7 @@ const data = {
             radius: 5
         },
         {
-            label: "Stock D",
+            label: "INTC",
             data: [90, 25, 45, 20, 10],
             backgroundColor: "#6f89ff",
             borderColor: "#1940f0",
@@ -44,7 +44,7 @@ const data = {
             radius: 5
         },
         {
-            label: "Stock E",
+            label: "T",
             data: [70, 20, 15, 40, 0],
             backgroundColor: "#d36fff",
             borderColor: "#a811eb",
@@ -77,11 +77,11 @@ const options = {
 };
 
 const data2 = {
-    labels: ["stock1", "stock2", "stock3", "stock4", "stock5"],
+    labels: ["MSFT", "AAPL", "AMD", "INTC", "T"],
     datasets: [
         {
             label: "Total Investments",
-            data: [10, 50, 25, 70, 40],
+            data: [80, 30, 25, 50, 40],
             backgroundColor: ["#ff6f6f", "#ffe56f", "#7aff6f", "#6f89ff", "#d36fff"],
 
             fill: false,
