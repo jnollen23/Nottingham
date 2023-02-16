@@ -125,24 +125,28 @@
 //   data: data2,
 //   options: options2
 // });
+
+
 let chart;
 let chart2;
 function grabChars() {
-  fetch("/api/chart/")
+  fetch("/api/portfolio/chartJson")
     .then(response => response.json())
-    .then(data => {
+    .then(chartData => {
       const ctx = document.getElementById('myChart');
       const ctx2 = document.getElementById('myChart2');
       chart = new Chart(ctx, {
         type: "line",
-        data: data.data,
-        options: data.options
+        data: chartData.data,
+        options: chartData.options
       });
       
       chart2 = new Chart(ctx2, {
         type: "doughnut",
-        data: data.data2,
-        options: data.options2
+        data: chartData.data2,
+        options: chartData.options2
       });
     });
-}
+} 
+
+grabChars();
