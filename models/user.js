@@ -37,6 +37,10 @@ User.init(
         len: [8],
       },
     },
+    balance:{
+      type: DataTypes.INTEGER,
+      allowNull:false,
+    }
   },
   {
     hooks: {

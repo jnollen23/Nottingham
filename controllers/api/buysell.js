@@ -1,131 +1,108 @@
-router.get('/:ID', async (req, res)
+//router.get('/:ID', async (req, res)
 
 
-const User = require('../../models/User');
-const userortfolio = require('');
+const { User, UserPortfolio, Stocks } = require('../../models');
+const router = require('express').Router();
 // const Transaction = require('');
 // const transactionOptions = require('');
 
 // const Api = require('');
 
-/**
- * @route   POST api/portfolio
- * @desc    Buy and sell stocks
- * @access  Public
- */
-router.post('/', auth, async (req, res) => {
-  try {
-    const action = req.body.action.toUpperCase();
-    const ticker = req.body.ticker.trim().toUpperCase();
-    const shares = Number(req.body.shares);
 
-    // Check if transaction action is valid
-    if (!transactionOptions.includes(action)) {
-      return res.status(400).json({ error: 'Invalid action' });
-    }
+router.post('/', async (req, res) => {
+    try {
+        let updateBalance = -1;
+        const action = req.body.action.toUpperCase();
+        const ticker = req.body.ticker.trim().toUpperCase();
+        const shares = Number(req.body.shares);
+        const user_id = req.body.user_id || req.session.user_id;
 
-    // Check if shares is a whole number
-    if (!Number.isInteger(shares)) {
-      return res
-        .status(400)
-        .json({ error: 'Shares value must be a whole number' });
-    }
-
-    const user = await User.findOne({ _id: req.userId });
-
-    // Check if quote symbol matches what the user wants
-    const response = await Api.getStockPrice(ticker);
-
-    // Calculate price of shares
-    const price = currency(response.data);
-    const totalCostOfShares = price.multiply(shares);
-
-    let newBalance = currency(user.balance);
-
-    // If user is buying
-    if (action === transactionOptions[0]) {
-      newBalance = newBalance.subtract(totalCostOfShares);
-      if (newBalance < 0) {
-        return res.status(400).json({ error: 'Not enough funds' });
-      }
-
-      // Check if user already has shares in the stock
-      const userStock = await Portfolio.findOneAndUpdate(
-        { user: ObjectId(req.userId), ticker },
-        { $inc: { shares } },
-      );
-
-      // Add stock to portfolio
-      if (!userStock) {
-        await new Portfolio({
-          user: ObjectId(req.userId),
-          ticker,
-          shares,
-        }).save();
-      }
-    }
-
-    // If user is selling
-    if (action === transactionOptions[1]) {
-      const userStock = await Portfolio.findOne({
-        user: ObjectId(req.userId),
-        ticker,
-      });
-
-      // Does the user own the shares of the stock?
-      if (!userStock) {
-        return res.status(400).json({ error: `${ticker} stocks not owned` });
-      }
-
-      // Does the user have enough shares to trade?
-      if (userStock.shares < shares) {
-        return res.status(400).json({ error: 'Insufficient shares' });
-      }
-
-      newBalance = newBalance.add(totalCostOfShares);
-
-      // Update or delete portfolio shares
-      if (userStock.shares > shares) {
-        userStock.shares -= shares;
-        await userStock.save();
-      } else {
-        await Portfolio.deleteOne({
-          user: ObjectId(req.userId),
-          ticker,
+        const user = await User.findOne({
+            where: {
+                id: user_id,
+            }
         });
-      }
+
+        // Check if quote symbol matches what the user wants
+        const stock = await Stocks.findOne({
+            where: {
+                stockSymbol: ticker
+            }
+        });
+
+        const userPortfolio = await UserPortfolio.findOne({
+            where: {
+                user: user_id,
+                ticker: ticker
+            }
+        });
+
+        // If user is buying
+        if (action === "BUY") {
+            const cost = shares * stock.currentPrice;
+            newBalance = user.balance - cost;
+            if (newBalance < 0) {
+                return res.status(400).json({ error: 'Not enough funds' });
+            }
+
+            // Add stock to portfolio
+            if (userPortfolio) {
+                const newPrice = cost / (shares + userPortfolio.shares) +
+                    ((userPortfolio.price * userPortfolio.shares) / (shares + userPortfolio.shares));
+                    const newshares = shares + userPortfolio.shares;
+                const updatedStock = { shares: newshares, price: newPrice };
+                await UserPortfolio.update(updatedStock, {
+                    where: {
+                        user: user_id,
+                        ticker: ticker
+                    }
+                });
+            }
+            else {
+                const newStock = {
+                    user: user_id,
+                    ticker: ticker,
+                    shares: shares,
+                    price: stock.currentPrice
+                };
+                await UserPortfolio.create(newStock)
+            }
+            updateBalance = newBalance;
+        }
+
+        // If user is selling
+        if (action === 'SELL') {
+            const cost = shares * stock.currentPrice;
+            newBalance = cost + user.balance;
+
+            // Update or delete portfolio shares
+            if (userPortfolio.shares > shares) {
+                const newshares = userPortfolio.shares - shares
+                await userPortfolio.update({shares: newshares});
+            }
+            else if (userPortfolio.shares === shares) {
+                await UserPortfolio.destroy({
+                    where: {
+                        user: user_id,
+                        ticker: ticker
+                    }
+                });
+            }
+            else {
+                return res.status(400).json({ error: 'Not enough stock' });
+            }
+             updateBalance = newBalance;
+        }
+
+        // Update user's balance
+        if (updateBalance > -1) {
+            await user.update({balance : updateBalance});
+        }
+        res.status(200).json({ message: 'sucessfully purchased the stock disered'});
     }
-
-    // Update user's balance
-    await User.findOneAndUpdate(
-      { _id: req.userId },
-      { balance: newBalance.value },
-    ); // eslint-disable-line no-underscore-dangle
-
-    // Record transaction
-    await new Transaction({
-      user: ObjectId(req.userId),
-      action,
-      ticker,
-      shares,
-      price,
-    }).save();
-
-    return res.status(201).end();
-  } catch (error) {
-    if (
-      error &&
-      error.response &&
-      error.response.status &&
-      error.response.status === 404
-    ) {
-      return res.status(400).json({ error: 'Invalid ticker' });
+    catch (error) {
+        console.log(error);
     }
-
-    return res
-      .status(500)
-      .json({ error: 'Server error. Please try again later' });
-  }
 });
 
 module.exports = router;
