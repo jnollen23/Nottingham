@@ -35,7 +35,7 @@ UserPortfolio.init(
         sequelize,
         timestamps:false,
         freezeTableName: true,
-        modelName:"userPortfolio"
+        modelName:"user_portfolio"
     }
 );
 module.exports = UserPortfolio;
