@@ -3,7 +3,6 @@ const watchlist = require('./watchlist');
 const { response } = require("express");
 const sequelize = require("../configuration/config");
 const { User } = require("../models");
-const withAuth = require("../utils/auth");
 const stock = require('../Utils/stockmarket');
 
 //const searchResult = requrie('../search');
@@ -27,7 +26,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/dashboard", withAuth, async (req, res) => {
+router.get("/dashboard", async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
@@ -42,7 +41,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
-router.get("/search/:ticker", withAuth, async(req, res) => {
+router.get("/search/:ticker", async(req, res) => {
   let stockCurrent = await stock.getCurrentPrice(req.params.ticker)
   let stockOpen = await stock.getOpenPrice(req.params.ticker)
   let stockCurrentPrice = "$"+parseFloat(stockCurrent.price).toFixed(2)
@@ -58,7 +57,7 @@ router.get("/search/:ticker", withAuth, async(req, res) => {
     tickerChange: stockChangePerc})
 });
 
-router.get("/portfolio", withAuth, async (req, res) => {
+router.get("/portfolio", async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ["password"] },
