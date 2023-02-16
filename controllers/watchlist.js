@@ -1,12 +1,10 @@
 const router = require('express').Router();
 const { Watchlist } = require('../models');
 
-const testingUserID = 1;
-
 router.get('/', async (req, res) => {
     try {
         const userList = await Watchlist.findAll({
-            where: { userID: testingUserID },
+            where: { userID: req.session.user_id },
             order: [
                 ["watchlistID", "desc"]
             ]
@@ -81,10 +79,10 @@ router.delete('/:ID', async (req, res) => {
         Watchlist.destroy({
             where: {
                 watchlistID: req.params.ID,
-                userID: req.session.userID
+                userID: req.session.user_id
             }
         });
-        res.status(200);
+        res.status(200).json({message:"deleted successfully"});
     }
     catch {
         res.status(404).json({ message: "No user with this ID!" });

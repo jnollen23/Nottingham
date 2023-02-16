@@ -55,4 +55,8 @@ canvas{
   margin: 0 auto;
   }
 
+.invisible-button{
+  background-color: transparent;
+  border: none;
+}
   
