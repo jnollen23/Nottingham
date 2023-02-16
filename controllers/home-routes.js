@@ -41,29 +41,28 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
-router.get('/search/:ticker/add', async (req, res) => {
-      const userList = await Watchlist.findAll({
-          where: { userID: req.session.user_id },
-          order: [
-              ["watchlistID", "desc"]
-          ]
-      });
-      for (let i = 0; i < userList.length; i++) {
-        if (i === 0 || userList[i].watchlistID != userList[i - 1].watchlistID) {
-            count++;
-            sortedList[count] = {
-                watchlistID: userList[i].watchlistID,
-                watchlistIDNoSpace: userList[i].watchlistID.replace(/ /g, '_'),
-                stockSymbols: [{
-                    stock: userList[i].stockSymbol,
-                    list: userList[i].watchlistID,
-                    isNotEmpty: (userList[i].stockSymbol !== "_")
-                }]
-            };
-          console.log(userList[i].watchlistID)  
-        }
-      }
-  });
+// router.get('/search/:ticker/add', async (req, res) => {
+//       const userList = await Watchlist.findAll({
+//           where: { userID: req.session.user_id },
+//           order: [
+//               ["watchlistID", "desc"]
+//           ]
+//       });
+//       for (let i = 0; i < userList.length; i++) {
+//         if (i === 0 || userList[i].watchlistID != userList[i - 1].watchlistID) {
+//             count++;
+//             sortedList[count] = {
+//                 watchlistID: userList[i].watchlistID,
+//                 watchlistIDNoSpace: userList[i].watchlistID.replace(/ /g, '_'),
+//                 stockSymbols: [{
+//                     stock: userList[i].stockSymbol,
+//                     list: userList[i].watchlistID,
+//                     isNotEmpty: (userList[i].stockSymbol !== "_")
+//             };
+//           console.log(userList[i].watchlistID)  
+//         }
+//       }
+//   });
 
 router.get("/search/:ticker", withAuth, async(req, res) => {
   

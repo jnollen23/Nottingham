@@ -13,10 +13,10 @@ document.getElementById("getTicker")
     }
 });
 
-document.getElementById("addToWatch").addEventListener("click", function(event) {
-    event.preventDefault();
-    console.log(window.location.pathname)
-    // let ticker = document.querySelector(`#getTicker`).value.trim();
+// document.getElementById("addToWatch").addEventListener("click", function(event) {
+//     event.preventDefault();
+//     console.log(window.location.pathname)
+//     // let ticker = document.querySelector(`#getTicker`).value.trim();
     
-    // document.location.replace('/search/' + ticker + '/add');
-});
+//     // document.location.replace('/search/' + ticker + '/add');
+// });
