@@ -58,12 +58,27 @@ router.get("/search/:ticker", withAuth, async(req, res) => {
     tickerChange: stockChangePerc})
 });
 
-router.get("/login", (req, res) => {
+router.get("/portfolio", withAuth, async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ["password"] },
+    });
+    const user = userData.get({ plain: true});
+    res.render("portfolio", {
+      user,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
+router.get("/signup", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/dashboard");
     return;
   }
-  res.render("login");
+  res.render("signup");
 });
 
 router.use('/watchlist', watchlist);

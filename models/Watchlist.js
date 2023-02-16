@@ -8,6 +8,7 @@ Watchlist.init(
         watchlistID: {
             type: DataTypes.STRING,
             allowNull: false,
+            unqiue: true,
         },
         userID: {
             type: DataTypes.INTEGER,
