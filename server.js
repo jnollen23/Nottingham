@@ -7,11 +7,10 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const routes = require('./controllers');
 const sequelize = require('./configuration/config');
-const stock = require('./utils/stockmarket');
-const withAuth = require('./utils/auth');
+const withAuth = require('./Utils/auth');
 
 const app = express();
-const PORT = process.env.APP_PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
 const sess = {
     secret: process.env.SUPER_SECRET,
