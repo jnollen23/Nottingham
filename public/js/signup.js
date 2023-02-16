@@ -17,15 +17,20 @@ const signupFormHandler = async (event) => {
                 'Content-Type': 'application/json'
             },
         });
-
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
-            alert('Failed to signup');
-        }
+            var modal = document.querySelector(".modal");
+            modal.style.display = "initial";
+            window.onclick = function (event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            };
+          }
     }
 };
 
 document
     .querySelector('.signup-form')
-    .addEventListener('submit', signupFormHandler);
+    .addEventListener('click', signupFormHandler);
