@@ -44,8 +44,8 @@
         </li>
       </ul>
        <form class="nav-item d-flex m-2" role="search">
-        <input class="form-control me-2 nes-input" type="search" placeholder="Search" aria-label="Search"> 
-        <div class="nav-item m-2"><button type="button" class="nes-btn is-warning" id="">Search</button></div>
+        <input class="form-control me-2 nes-input" type="search" placeholder="Search" aria-label="Search" id="getTicker"> 
+        <div class="nav-item m-2"><button type="button" class="nes-btn is-warning" id="searchButton">Search</button></div>
     </form>  
     </div>
   </div>
@@ -64,6 +64,7 @@
     
     {{#if logged_in}}
     <script src="/js/logout.js"></script>
+    <script src="/js/search.js"></script>
     <script src="/js/watchlist.js"></script>
     {{/if}}
 </body>
