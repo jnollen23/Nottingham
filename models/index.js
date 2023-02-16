@@ -1,6 +1,7 @@
 const User = require('./user');
 const Watchlist = require('./Watchlist');
 const Stocks = require('./Stocks');
+const UserPortfolio = require('./userPortfolio');
 
 Watchlist.hasMany(User, {
     foreignKey:'id',
@@ -16,4 +17,18 @@ Stocks.belongsTo(Watchlist,{
     foreignKey:'stockSymbol'
 });
 
-module.exports = {User, Watchlist, Stocks};
+UserPortfolio.hasMany(User, {
+    foreignKey:'id',
+});
+User.belongsTo(UserPortfolio, {
+    foreignKey: 'id',
+});
+
+UserPortfolio.hasMany(Stocks, {
+    foreignKey:'stockSymbol',
+});
+Stocks.belongsTo(UserPortfolio, {
+    foreignKey:'stockSymbol',
+});
+
+module.exports = {User, Watchlist, Stocks, UserPortfolio};
