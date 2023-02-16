@@ -45,7 +45,8 @@ router.get("/search/:ticker", async(req, res) => {
     console.log(req.params.ticker)
     let stockCurrent = await stock.getCurrentPrice(req.params.ticker)
     let stockOpen = await stock.getOpenPrice(req.params.ticker)
-
+    console.log(`Stock Current Price:${stockCurrent}`);
+    console.log(`Stock Open Price ${stockOpen}`);
     if (stockOpen.status === "error"){
       let stockName = "Stock Not Found"
       
@@ -71,6 +72,16 @@ router.get("/search/:ticker", async(req, res) => {
   } catch(err){
       res.status(500).json(err);
   }
+});
+
+router.get("/search/", async (req, res)=>{
+  res.render("search",{
+    logged_in: true,
+          tickerName: "Please enter a stock to search",
+          tickerCurrent: "", 
+          tickerOpenPrice: "",  
+          tickerChange: ""
+  });
 });
 
 router.get("/portfolio", async (req, res) => {
