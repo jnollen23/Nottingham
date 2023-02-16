@@ -3,6 +3,7 @@ const watchlist = require('./watchlist');
 const { response } = require("express");
 const sequelize = require("../configuration/config");
 const { User } = require("../models");
+const { Watchlist } = require('../models');
 const withAuth = require("../utils/auth");
 const stock = require('../Utils/stockmarket');
 
@@ -40,12 +41,34 @@ router.get("/dashboard", withAuth, async (req, res) => {
   }
 });
 
+router.get('/search/:ticker/add', async (req, res) => {
+      const userList = await Watchlist.findAll({
+          where: { userID: req.session.user_id },
+          order: [
+              ["watchlistID", "desc"]
+          ]
+      });
+      for (let i = 0; i < userList.length; i++) {
+        if (i === 0 || userList[i].watchlistID != userList[i - 1].watchlistID) {
+            count++;
+            sortedList[count] = {
+                watchlistID: userList[i].watchlistID,
+                watchlistIDNoSpace: userList[i].watchlistID.replace(/ /g, '_'),
+                stockSymbols: [{
+                    stock: userList[i].stockSymbol,
+                    list: userList[i].watchlistID,
+                    isNotEmpty: (userList[i].stockSymbol !== "_")
+                }]
+            };
+          console.log(userList[i].watchlistID)  
+        }
+      }
+  });
+
 router.get("/search/:ticker", withAuth, async(req, res) => {
   
   let stockCurrent = await stock.getCurrentPrice(req.params.ticker)
   let stockOpen = await stock.getOpenPrice(req.params.ticker)
-  console.log(stockOpen)
-  console.log(stockOpen.status)
 
   if (stockOpen.status === "error"){
     let stockName = "Stock Not Found"
@@ -55,9 +78,7 @@ router.get("/search/:ticker", withAuth, async(req, res) => {
       logged_in: true,
       tickerName: stockName,
     })
-  }
-
-  else{
+  } else{
     let stockCurrentPrice = "$"+parseFloat(stockCurrent.price).toFixed(2)
     let stockOpenPrice = "$"+parseFloat(stockOpen.open).toFixed(2)
     let stockChangePerc = "(" + parseFloat(stockOpen.change).toFixed(2) + "%)"
