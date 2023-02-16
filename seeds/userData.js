@@ -6,13 +6,13 @@ const usersData = [
         name: 'mike jones',
         email: 'mike@gmail.com',
         password: 'password',
-        balance: 10000
+        balance: 1000000
     }, {
         id: 2,
         name: 'steve jobs',
         email: 'jobs@gmail.com',
         password: 'password1!',
-        balance: 10000
+        balance: 1000000
     },
 ];
 const seedUsers = () => User.bulkCreate(usersData);
