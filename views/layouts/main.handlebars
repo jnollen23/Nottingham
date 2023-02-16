@@ -19,12 +19,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
-<body style="background-color: lightgrey;">
+<body style="background-color: rgb(163, 163, 163);">
     <header>
         {{#if logged_in}}
-        <nav>
-            <button type="button" class="nes-btn is-warning" id="logout">Logout</button>
-        </nav>
+        <nav class="navbar navbar-expand-lg nes-container is-rounded m-3" style="background-color: lightgrey">
+  <div class="container-fluid ">
+    <img src="./images/NOTTINGHAM-LOGO-BOLD.png" alt="nottingham logo" class="logo m-1" style="width:120px; height:135px;"/>
+    <button class="navbar-toggler nes-container is-rounded nes-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon m-3"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item m-3">
+          <a type="button" class="nes-btn is-success" href="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item m-3">
+           <a type="button" class="nes-btn is-primary" href="/watchlist">Watchlist</a>
+        </li>
+         <li class="nav-item m-3">
+           <a type="button" class="nes-btn is-error" href="/portfolio">Portfolio</a>
+        </li>
+         <li class="nav-item m-3">
+           <button type="button" class="nes-btn is-warning" id="logout">Logout</button>
+        </li>
+      </ul>
+       <form class="nav-item d-flex m-2" role="search">
+        <input class="form-control me-2 nes-input" type="search" placeholder="Search" aria-label="Search"> 
+        <div class="nav-item m-2"><button type="button" class="nes-btn is-warning" id="">Search</button></div>
+    </form>  
+    </div>
+  </div>
+</nav>
+
         {{/if}}
     </header>
     <main>
