@@ -7,7 +7,6 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const routes = require('./controllers');
 const sequelize = require('./configuration/config');
-const stock = require('./utils/stockmarket');
 const withAuth = require('./utils/auth');
 
 const app = express();
