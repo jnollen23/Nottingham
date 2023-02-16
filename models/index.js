@@ -20,7 +20,7 @@ Stocks.belongsTo(Watchlist,{
 UserPortfolio.hasMany(User, {
     foreignKey:'id',
 });
-Stocks.belongsTo(UserPortfolio, {
+User.belongsTo(UserPortfolio, {
     foreignKey:'id',
 });
 
