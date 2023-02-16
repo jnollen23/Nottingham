@@ -51,7 +51,7 @@ router.get("/search/:ticker", async(req, res) => {
       
       res.render("search", {
 
-        logged_in: true,
+        logged_in: req.session.logged_in,
         tickerName: "Please enter a stock ticker symbol",
       })
     } else{
@@ -60,7 +60,7 @@ router.get("/search/:ticker", async(req, res) => {
         let stockChangePerc = "(" + parseFloat(stockOpen.change).toFixed(2) + "%)"
 
         res.render("search", {
-          logged_in: true,
+          logged_in: req.session.logged_in,
           tickerName: stockOpen.name,
           tickerCurrent: stockCurrentPrice, 
           tickerOpenPrice: stockOpenPrice,  
