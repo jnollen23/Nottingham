@@ -11,7 +11,7 @@ const stock = require('./utils/stockmarket');
 const withAuth = require('./utils/auth');
 
 const app = express();
-const PORT = process.env.APP_PORT;
+const PORT = process.env.APP_PORT || 3001;
 
 const sess = {
     secret: process.env.SUPER_SECRET,
