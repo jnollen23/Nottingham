@@ -14,10 +14,6 @@ const watchlistData = [
         userID:1,
         stockSymbol:`AAPL`,
     },{
-        watchlistID:"Test List 1",
-        userID:1,
-        stockSymbol:`A`,
-    },{
         watchlistID:"Test List 2",
         userID:1,
         stockSymbol:`AMD`,
