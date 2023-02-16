@@ -65,31 +65,35 @@ router.get("/dashboard", withAuth, async (req, res) => {
 //   });
 
 router.get("/search/:ticker", withAuth, async(req, res) => {
-  
-  let stockCurrent = await stock.getCurrentPrice(req.params.ticker)
-  let stockOpen = await stock.getOpenPrice(req.params.ticker)
+  try {
+    console.log(req.params.ticker)
+    let stockCurrent = await stock.getCurrentPrice(req.params.ticker)
+    let stockOpen = await stock.getOpenPrice(req.params.ticker)
 
-  if (stockOpen.status === "error"){
-    let stockName = "Stock Not Found"
-    
-    res.render("search", {
+    if (stockOpen.status === "error"){
+      let stockName = "Stock Not Found"
+      
+      res.render("search", {
 
-      logged_in: true,
-      tickerName: stockName,
-    })
-  } else{
-    let stockCurrentPrice = "$"+parseFloat(stockCurrent.price).toFixed(2)
-    let stockOpenPrice = "$"+parseFloat(stockOpen.open).toFixed(2)
-    let stockChangePerc = "(" + parseFloat(stockOpen.change).toFixed(2) + "%)"
+        logged_in: true,
+        tickerName: stockName,
+      })
+    } else{
+        let stockCurrentPrice = "$"+parseFloat(stockCurrent.price).toFixed(2)
+        let stockOpenPrice = "$"+parseFloat(stockOpen.open).toFixed(2)
+        let stockChangePerc = "(" + parseFloat(stockOpen.change).toFixed(2) + "%)"
 
-    res.render("search", {
+        res.render("search", {
 
-      logged_in: true,
-      tickerName: stockOpen.name,
-      tickerCurrent: stockCurrentPrice, 
-      tickerOpenPrice: stockOpenPrice,  
-      tickerChange: stockChangePerc
-    })
+          logged_in: true,
+          tickerName: stockOpen.name,
+          tickerCurrent: stockCurrentPrice, 
+          tickerOpenPrice: stockOpenPrice,  
+          tickerChange: stockChangePerc
+        })
+      }
+  } catch(err){
+      res.status(500).json(err);
   }
 });
 
