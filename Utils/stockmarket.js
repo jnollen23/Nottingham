@@ -14,10 +14,13 @@ stocks.getCurrentPrice = async function GetCurrentPrice(stockName) {
 }
 
 stocks.getOpenPrice = async function GetOpenPrice(stockName) {
+    try{
     const path = `${apiURL}quote?symbol=${stockName}&apikey=${apiKey}`
     const response = await fetch(path);
     const returnvalue =  response.json();
+    console.log(response);
     return returnvalue;
+    }catch(err){console.log(err)}
 }
 
 let wsClient = null;
