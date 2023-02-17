@@ -8,8 +8,7 @@ const apiKey = process.env.API_KEY
 
 stocks.getCurrentPrice = async function GetCurrentPrice(stockName) {
     const path = `${apiURL}price?symbol=${stockName}&apikey=${apiKey}`
-    console.log(`Path to stockmarket >> ${path}`);
-    const response = await fetch(path)
+    fetch(path)
         .then(response => response.json())
         .then(data => {
             return data.json()
