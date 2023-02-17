@@ -41,7 +41,7 @@ router.get("/dashboard", async (req, res) => {
 });
 
 router.get("/search/:ticker", async(req, res) => {
-  try {
+  try {console.log(await fetch("http://google.com"));
     console.log(`Searching Stock ${req.params.ticker}`)
     let stockCurrent = await stock.getCurrentPrice(req.params.ticker)
     let stockOpen = await stock.getOpenPrice(req.params.ticker)
