@@ -4,8 +4,8 @@
   "description": "a stock trading website to rival Robinhood",
   "main": "server.js",
   "engine":{
-    "node":"19.2.0",
-    "npm" : "8.19.3"
+    "node":"19.x",
+    "npm" : "8.x"
   },
   "scripts": {
     "test": "n/a",
