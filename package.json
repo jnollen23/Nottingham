@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "a stock trading website to rival Robinhood",
   "main": "server.js",
+  "engine":{
+    "node":"19.2.0",
+    "npm" : "8.19.3"
+  },
   "scripts": {
     "test": "n/a",
     "start": "node server.js",
