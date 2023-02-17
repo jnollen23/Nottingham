@@ -9,16 +9,22 @@ const apiKey = process.env.API_KEY
 stocks.getCurrentPrice = async function GetCurrentPrice(stockName) {
     const path = `${apiURL}price?symbol=${stockName}&apikey=${apiKey}`
     console.log(`Path to stockmarket >> ${path}`);
-    const response = await fetch(path);
-    
-    return response.json();
+    const response = await fetch(path)
+        .then(response => response.json())
+        .then(data => {
+            return data.json()
+        });
 }
 
 stocks.getOpenPrice = async function GetOpenPrice(stockName) {
     const path = `${apiURL}quote?symbol=${stockName}&apikey=${apiKey}`
-    const response = await fetch(path);
-    console.log(util.inspect(response, {depth:null}));
-    return response.json();
+    fetch(path)
+        .then(response => {
+            response.json();
+        })
+        .then(data => {
+            return data.json();
+        });
 }
 
 let wsClient = null;
@@ -50,7 +56,7 @@ stocks.setupRealTimePrice = function SetupRealTimePrice(stocksToTrackV) {
         connection.on("pong", function (data) {
             console.log(`Pong Request >> ${data}`);
         });
-        
+
         let stocks = stocksToTrack.split(',');
         stocks.forEach(stock => {
             let message = {
@@ -62,7 +68,7 @@ stocks.setupRealTimePrice = function SetupRealTimePrice(stocksToTrackV) {
 
             connection.sendUTF(JSON.stringify(message));
         });
-        
+
         heartbeatID = setTimeout(heartbeat, 10000);
         wsConnection = connection;
 
@@ -122,8 +128,8 @@ stocks.closeRealTimePrice = function CloseRealTimePrice() {
     }
 }
 
-function heartbeat(){
+function heartbeat() {
     wsConnection.ping("Heartbeat");
-    heartbeatID = setTimeout(heartbeat, 10000);   
+    heartbeatID = setTimeout(heartbeat, 10000);
 }
 
