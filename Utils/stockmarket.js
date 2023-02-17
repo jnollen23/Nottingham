@@ -8,22 +8,16 @@ const apiKey = process.env.API_KEY
 
 stocks.getCurrentPrice = async function GetCurrentPrice(stockName) {
     const path = `${apiURL}price?symbol=${stockName}&apikey=${apiKey}`
-    fetch(path)
-        .then(response => response.json())
-        .then(data => {
-            return data.json()
-        });
+    const response = await fetch(path);
+    const returnvalue = response.json();
+    return returnvalue;
 }
 
 stocks.getOpenPrice = async function GetOpenPrice(stockName) {
     const path = `${apiURL}quote?symbol=${stockName}&apikey=${apiKey}`
-    fetch(path)
-        .then(response => {
-            response.json();
-        })
-        .then(data => {
-            return data.json();
-        });
+    const response = await fetch(path);
+    const returnvalue =  response.json();
+    return returnvalue;
 }
 
 let wsClient = null;
